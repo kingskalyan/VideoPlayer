@@ -1,0 +1,18 @@
+import cv2 as c
+imag = c.VideoCapture(0)
+fourcc = c.VideoWriter_fourcc(*'XVID')
+width = int(imag.get(3))
+height = int(imag.get(4))
+size = (width,height)
+output = c.VideoWriter('output.avi.mkv',fourcc,200,size)
+while True:
+	re,frame = imag.read()
+	c.imshow('trail window',frame)
+	for i in frame:
+		output.write(frame)
+	if c.waitKey(10) == ord("q"):
+		c.imshow('trail window',frame)
+		break
+imag.release()
+output.release()
+c.destroyAllWindows()
